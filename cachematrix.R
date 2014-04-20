@@ -9,7 +9,7 @@
 ## get the value of the matrix
 ## set the value of the inverse
 ## get the value of the inverse
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(matrix = matrix()) {
     # initalize the inverse to NULL
     inverse <- NULL
     
@@ -52,6 +52,19 @@ makeCacheMatrix <- function(x = matrix()) {
 ## the computation. Otherwise, it calculates the inverse of the data and sets
 ## the value of the inverse in the cache via the set_inverse function. Assumes
 ## that the matrix supplied is always invertible
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function(cacheMatrix, ...) {
+    # Get the currently stored inverse cache
+    inverse <- cacheMatrix$get_inverse()
+    
+    # If the stored cache is not NULL return it and break
+    if(!is.null(inverse)) {
+        message("getting cached data")
+        return(inverse)
+    }
+    
+    # Stored cache was null. Calculate new inverse, cache it, and return it.
+    data <- cacheMatrix$get_data()
+    inverse <- solve(data)
+    cacheMatrix$set_inverse(inverse)
+    inverse
 }
