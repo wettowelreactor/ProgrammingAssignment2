@@ -9,9 +9,12 @@
 ## get the value of the matrix
 ## set the value of the inverse
 ## get the value of the inverse
-makeCacheMatrix <- function(matrix = matrix()) {
+makeCacheMatrix <- function(data = matrix()) {
     # initalize the inverse to NULL
     inverse <- NULL
+    
+    # If an initial matrix is provided store it.
+    data <- data
     
     # Set data function for creating a new Matrix
     set_data <- function(matrix) {
